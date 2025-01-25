@@ -9,7 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth/cordova";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth/web-extension";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
