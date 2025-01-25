@@ -47,7 +47,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">WhereIsIt</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -95,7 +95,9 @@ const Navbar = () => {
         )}
 
         {
-            (!user && !user?.email) && <a className="btn">Login</a>
+            (user && user?.email) ? (<a className="btn">Logout</a>)
+            :
+            (<a className="btn">Login</a>)
         }
       </div>
     </div>
