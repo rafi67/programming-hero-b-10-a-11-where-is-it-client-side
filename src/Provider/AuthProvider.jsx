@@ -11,7 +11,7 @@ import {
 } from "firebase/auth/cordova";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth/web-extension";
 
-export const authContext = createContext();
+export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
   };
 
-  return <AuthProvider.Provider value={authInfo}>{ children }</AuthProvider.Provider>;
+  return <AuthContext.Provider value={authInfo}>{ children }</AuthContext.Provider>;
 };
 
 AuthProvider.propTypes = {
