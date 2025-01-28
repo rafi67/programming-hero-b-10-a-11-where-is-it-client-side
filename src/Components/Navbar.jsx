@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Link } from "react-router";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
@@ -29,34 +30,27 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Item 1</a>
+              <Link to='/'>Home</Link>
             </li>
             <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
+              <Link>Lost & Found Items</Link>
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">WhereIsIt</a>
+        <Link className="btn btn-ghost text-xl" to="/">
+          WhereIsIt
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
             <a>Home</a>
           </li>
-          <li>
-            <a>Lost & Found Items</a>
-          </li>
+          {user && user?.email && (
+            <li>
+              <Link to="/">Lost & Found Items</Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="navbar-end">
@@ -87,18 +81,15 @@ const Navbar = () => {
               <li>
                 <a>Manage My Items</a>
               </li>
-              <li>
-                <a>Logout</a>
-              </li>
             </ul>
           </div>
         )}
 
-        {
-            (user && user?.email) ? (<a className="btn">Logout</a>)
-            :
-            (<a className="btn">Login</a>)
-        }
+        {user && user?.email ? (
+          <a className="btn">Logout</a>
+        ) : (
+          <a className="btn">Login</a>
+        )}
       </div>
     </div>
   );

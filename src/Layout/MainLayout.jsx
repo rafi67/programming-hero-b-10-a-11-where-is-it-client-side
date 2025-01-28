@@ -3,6 +3,7 @@ import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 
 const MainLayout = () => {
+
     return (
         <div className='container min-h-screen flex flex-col space-y-2 justify-between mx-auto'>
             <header>
