@@ -57,10 +57,7 @@ const Home = () => {
 };
 
 const getItems = async () => {
-  return await axios.get("http://localhost:5000/getItem").then((res) => {
-    console.log(res.data);
-    return res.data;
-  });
+  return await axios.get("http://localhost:5000/getItem").then((res) => res.data);
 };
 
 export default Home;
