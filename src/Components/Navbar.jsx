@@ -44,7 +44,7 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Home</a>
+            <a className="font-bold">Home</a>
           </li>
           {user && user?.email && (
             <li>
