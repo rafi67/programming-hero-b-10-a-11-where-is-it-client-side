@@ -2,6 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 import Loading from "./Loading";
+import { IoMdLogIn } from "react-icons/io";
+import { MdReport } from "react-icons/md";
+import { BsSearch } from "react-icons/bs";
+import { VscDebugDisconnect } from "react-icons/vsc";
 
 const Home = () => {
   const { data, isPending, error } = useQuery({
@@ -57,34 +61,58 @@ const Home = () => {
       </section>
 
       {/* how it works section */}
-      <div
-        className="hero min-h-screen"
-        style={{
-          backgroundImage:
-            "url(https://i.ibb.co.com/ymQzKVN5/find-lost-ITems.jpg)",
-        }}
-      >
-        <div className="hero-overlay"></div>
-        <div className="hero-content text-neutral-content text-center">
-          <div className="max-w-md space-y-2">
-            <h1 className="mb-5 text-5xl font-bold">How It Works</h1>
-            <ul className="list-disc mx-auto text-left">
-              <li>Create an account and login</li>
-              <li>
-                Report a lost item or list a found item with details and images.
-              </li>
-              <li>
-                Browse the listings or use search filters to find matches.
-              </li>
-              <li>
-                Connect with the owner/finder securely through the platform.
-              </li>
-              <li>Arrange for item recovery and mark it as resolved.</li>
-            </ul>
-            <button className="btn btn-primary">Get Started</button>
+      <section className="text-center space-y-4">
+        <h1 className="text-4xl font-bold">How to Proceed</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+          {/* card 1 */}
+          <div className="flex flex-col flex-start text-left h-[250px] space-y-2 rounded-2xl bg-[#E7C1D3] p-6">
+            <IoMdLogIn className="text-4xl" />
+            <h1 className="text-xl font-extrabold">
+              Create an account and log in.
+            </h1>
+            <p className="text-lg font-medium">
+              Sign up quickly, log in securely, and access all features to
+              report, list, and find lost items effortlessly.
+            </p>
+          </div>
+
+          {/* card 2 */}
+          <div className="flex flex-col flex-start text-left h-[250px] space-y-2 rounded-2xl bg-[#EFDA6E] p-6">
+            <MdReport className="text-4xl" />
+            <h1 className="text-xl font-extrabold">
+              Report a lost item or list a found item
+            </h1>
+            <p className="text-lg font-medium">
+              Describe your lost or found item with details and images to help
+              connect with the right person faster.
+            </p>
+          </div>
+
+          {/* card 3 */}
+          <div className="flex flex-col flex-start text-left h-[250px] space-y-2 rounded-2xl bg-[#A4DAC3] p-6">
+            <BsSearch className="text-4xl" />
+            <h1 className="text-xl font-extrabold">
+              Browse the listings or use search filters
+            </h1>
+            <p className="text-lg font-medium">
+              Easily explore listings or apply search filters to quickly find
+              lost or found items that match your needs.
+            </p>
+          </div>
+
+          {/* card 4 */}
+          <div className="flex flex-col flex-start text-left h-[250px] space-y-2 rounded-2xl bg-[#77AAEA] p-6">
+            <VscDebugDisconnect className="text-4xl" />
+            <h1 className="text-xl font-extrabold">
+              Connect with the owner/finder securely
+            </h1>
+            <p className="text-lg font-medium">
+              Send secure messages through the platform to safely connect with
+              the item's owner or finder.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
