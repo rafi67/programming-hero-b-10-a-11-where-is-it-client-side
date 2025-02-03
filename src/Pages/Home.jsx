@@ -30,7 +30,7 @@ const Home = () => {
   return (
     <div className="space-y-4">
       {/* lost and find items section */}
-      <section className="flex flex-col items-center space-y-2">
+      <section className="flex flex-col items-center space-y-2 mb-16">
         <h1 className="text-4xl font-extrabold text-gray-400">
           {text}
           <Cursor cursorColor="gray" />
@@ -38,7 +38,7 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {data.map((d) => (
             <>
-              <div key={d._id} className="card bg-base-100 w-96 shadow-sm">
+              <div key={d._id} className="card bg-base-100 w-96 shadow-xl">
                 <figure className="px-10 pt-10">
                   <img
                     src={d.thumbnail}
@@ -46,21 +46,21 @@ const Home = () => {
                     className="rounded-xl w-full h-[250px]"
                   />
                 </figure>
-                <div className="card-body items-center text-center">
-                  <h2 className="card-title">{d.title}</h2>
-                  <p>{d.description}</p>
+                <div className="card-body items-start space-y-3">
+                  <h2 className="card-title text-[#09080F] font-semibold text-2xl">{d.title}</h2>
+                  <p className="text-[#09080F99] text-xl font-medium">{d.description}</p>
                   <div className="card-actions">
-                    <button className="btn btn-primary">View Details</button>
+                    <button className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full">View Details</button>
                   </div>
                 </div>
               </div>
             </>
           ))}
         </div>
-        <button className="btn btn-primary">See All</button>
+        <button className="btn border-2 border-[#9538E2] rounded-full text-[#9538E2] font-bold mt-12">See All</button>
       </section>
 
-      {/* how it works section */}
+      {/* how to proceed section */}
       <section className="text-center space-y-4">
         <h1 className="text-4xl font-bold">How to Proceed</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
