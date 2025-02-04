@@ -113,6 +113,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* About Section */}
+      <section className="text-center mt-24 space-y-4">
+        <h1 className="text-3xl text-[#09080F] font-bold">Where Is It</h1>
+        <p className="text-lg font-medium text-[#09080F99]">WhereIsIt is a Lost and Found web application designed to help users reconnect with their misplaced belongings. It provides a seamless platform where individuals can report lost items, list found objects, and browse a database to find matches. With secure communication features, users can connect with the rightful owners or finders to arrange safe item recovery. The app leverages a user-friendly interface, advanced search filters, and image uploads to enhance efficiency. **WhereIsIt** aims to simplify the lost-and-found process, reducing stress and increasing the chances of retrieving valuable possessions.</p>
+      </section>
     </div>
   );
 };
