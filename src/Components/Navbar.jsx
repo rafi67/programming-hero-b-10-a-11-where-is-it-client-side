@@ -44,7 +44,7 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a className="font-bold">Home</a>
+            <Link className="font-bold" to="/">Home</Link>
           </li>
           {user && user?.email && (
             <li>
@@ -88,7 +88,7 @@ const Navbar = () => {
         {user && user?.email ? (
           <a className="btn">Logout</a>
         ) : (
-          <a className="btn">Login</a>
+          <Link className="btn" to="/login">Login</Link>
         )}
       </div>
     </div>

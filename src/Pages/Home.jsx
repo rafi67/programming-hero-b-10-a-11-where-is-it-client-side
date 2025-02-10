@@ -31,9 +31,9 @@ const Home = () => {
     <div className="space-y-4">
       {/* lost and find items section */}
       <section className="flex flex-col items-center space-y-2 mb-16">
-        <h1 className="text-4xl font-extrabold text-gray-400">
+        <h1 className="text-4xl font-extrabold text-[#0B0B0B]">
           {text}
-          <Cursor cursorColor="gray" />
+          <Cursor cursorColor="black" />
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {data.map((d) => (

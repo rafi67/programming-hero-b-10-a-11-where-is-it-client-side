@@ -4,6 +4,7 @@ import Header from "../Components/Header";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Loading from "../Pages/Loading";
+import { ToastContainer } from "react-toastify";
 
 const MainLayout = () => {
 
@@ -14,6 +15,7 @@ const MainLayout = () => {
             <header>
                 <Header></Header>
             </header>
+            <ToastContainer position="top-center" />
             <main className="mx-auto">
                 {
                     loading ? <Loading></Loading> : <Outlet/>
