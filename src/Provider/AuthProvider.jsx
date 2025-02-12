@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-} from "firebase/auth/cordova";
+} from "firebase/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export const AuthContext = createContext();

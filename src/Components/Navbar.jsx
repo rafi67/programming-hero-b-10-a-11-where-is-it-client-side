@@ -3,7 +3,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { Link } from "react-router";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   return (
     <div className="navbar bg-base-100 shadow-xl rounded-xl">
@@ -30,7 +30,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <Link to='/'>Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link>Lost & Found Items</Link>
@@ -44,7 +44,9 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link className="font-bold" to="/">Home</Link>
+            <Link className="font-bold" to="/">
+              Home
+            </Link>
           </li>
           {user && user?.email && (
             <li>
@@ -53,7 +55,7 @@ const Navbar = () => {
           )}
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end space-x-4">
         {user && user?.email && (
           <div className="dropdown dropdown-end">
             <div
@@ -61,12 +63,13 @@ const Navbar = () => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
-              </div>
+                <div className="w-10">
+                  <img
+                    className="rounded-full"
+                    alt="Tailwind CSS Navbar component"
+                    src={user.photoURL}
+                  />
+                </div>
             </div>
             <ul
               tabIndex={0}
@@ -85,10 +88,18 @@ const Navbar = () => {
           </div>
         )}
 
+        {
+          user && user?.email && <p>{user.displayName}</p>
+        }
+
         {user && user?.email ? (
-          <a className="btn">Logout</a>
+          <a className="btn" onClick={logOut}>
+            Logout
+          </a>
         ) : (
-          <Link className="btn" to="/login">Login</Link>
+          <Link className="btn" to="/login">
+            Login
+          </Link>
         )}
       </div>
     </div>
