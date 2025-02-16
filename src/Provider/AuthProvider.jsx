@@ -2,14 +2,16 @@ import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase/firebase_init";
 import PropTypes from "prop-types";
 import {
-  createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
   updateProfile,
 } from "firebase/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth/cordova";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);

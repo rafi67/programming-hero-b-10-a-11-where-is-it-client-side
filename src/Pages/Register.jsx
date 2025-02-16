@@ -1,47 +1,45 @@
 import Lottie from "lottie-react";
 import login from "../Login.json";
-import { FcGoogle } from "react-icons/fc";
-import { useContext, useState } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
-import { Link, useLocation, useNavigate } from "react-router";
-import { toast } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
-const Login = () => {
-  const { userLogin, userLoginWithGoogle, setUser, user } = useContext(AuthContext);
-  const location = useLocation();
-  const navigate = useNavigate();
-
+const Register = () => {
+  const { createUser, setUser, updateUserProfile } = useContext(AuthContext);
   const [inputType, setInputType] = useState("password");
   const [showPassword, setShowPassword] = useState(false);
-
-  const signInWithGoogle = (e) => {
-    e.preventDefault();
-    userLoginWithGoogle()
-      .then((result) => {
-        setUser(result.user);
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
-    console.log(user);
-  };
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
+    const form = new FormData(e.target);
+    const name = form.get("name");
 
-    userLogin(email, password)
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+
+    const email = form.get("email");
+    const password = form.get("password");
+    const photo = form.get("photo");
+
+    if (!passwordRegex.test(password)) {
+      toast.error(
+        "Password must be at least 6 characters one uper case and one lower case character"
+      );
+      return;
+    }
+
+    createUser(email, password)
       .then((result) => {
         setUser(result.user);
-        navigate(location?.state ? location.state : "/");
+        updateUserProfile({ display: name, photoURL: photo }).then(() => {
+          navigate("/");
+        });
       })
       .catch((err) => {
-        toast.error(err.message);
+        alert(err.message);
       });
   };
 
@@ -52,7 +50,25 @@ const Login = () => {
           <Lottie className="w-full" animationData={login} />
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <div onSubmit={handleSubmit} className="card-body">
+          <form className="card-body" onSubmit={handleSubmit}>
+            <fieldset className="fieldset">
+              <label className="fieldset-label">Name</label>
+              <input
+                type="text"
+                name="name"
+                className="input"
+                placeholder="Name"
+              />
+              <fieldset className="fieldset relative">
+                <label className="fieldset-label">Photo URL</label>
+                <input
+                  type="text"
+                  name="photo"
+                  className="input"
+                  placeholder="Photo URL"
+                />
+              </fieldset>
+            </fieldset>
             <fieldset className="fieldset">
               <label className="fieldset-label">Email</label>
               <input
@@ -83,23 +99,27 @@ const Login = () => {
                 />
               </fieldset>
               <div>
-                <a className="link link-hover font-semibold text-gray-500">Forgot password?</a>
+                <a className="link link-hover font-semibold text-gray-500">
+                  Forgot password?
+                </a>
               </div>
             </fieldset>
             <div className="flex flex-col space-y-4">
-              <button className="btn btn-neutral mt-4">Login</button>
-              <hr className="border-gray-500" />
-              <button className="btn" onClick={signInWithGoogle}>
-                <FcGoogle className="text-2xl" />
-                Login With Google
-              </button>
-              <Link className="text-center font-semibold text-gray-500" to="/register">Don't Have An Account ? <span className="text-red-600">Register</span></Link>
+              <button className="btn btn-neutral mt-4">Register</button>
+
+              <Link
+                className="text-center font-semibold text-gray-500"
+                to="/login"
+              >
+                Already Have An Account ?{" "}
+                <span className="text-red-600">Login</span>
+              </Link>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;
