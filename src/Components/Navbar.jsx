@@ -50,7 +50,7 @@ const Navbar = () => {
           </li>
           {user && user?.email && (
             <li>
-              <Link to="/">Lost & Found Items</Link>
+              <Link to="/lostAndFoundItems">Lost & Found Items</Link>
             </li>
           )}
         </ul>
