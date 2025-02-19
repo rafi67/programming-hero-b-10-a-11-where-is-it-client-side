@@ -52,7 +52,7 @@ const Login = () => {
           <Lottie className="w-full" animationData={login} />
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <div onSubmit={handleSubmit} className="card-body">
+          <form onSubmit={handleSubmit} className="card-body">
             <fieldset className="fieldset">
               <label className="fieldset-label">Email</label>
               <input
@@ -95,7 +95,7 @@ const Login = () => {
               </button>
               <Link className="text-center font-semibold text-gray-500" to="/register">Don't Have An Account ? <span className="text-red-600">Register</span></Link>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
