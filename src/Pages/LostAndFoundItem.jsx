@@ -1,18 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "./Loading";
+import { toast } from "react-toastify";
 
 const LostAndFoundItem = () => {
   const { data, isPending, error } = useQuery({
     queryKey: ["items"],
     queryFn: async () =>
       await axios
-        .get("http://localhost:5000/getAllItem")
+        .get("http://localhost:5000/getAllItem", { withCredentials: true })
         .then((res) => res.data),
+    retry: 2,
+    refetchInterval:300000,
   });
 
   if (isPending) {
     return <Loading></Loading>;
+  }
+
+  if(error) {
+    console.log('Lost and Found Item', error.message);
   }
 
   return (
@@ -35,7 +42,7 @@ const LostAndFoundItem = () => {
                 <h2 className="card-title text-[#09080F] font-semibold text-2xl">
                   {d.title}
                 </h2>
-                <p className="text-[#09080F99] text-xl font-medium">
+                <p className="text-[#09080F99] text-xl font-medium text-left">
                   {d.description}
                 </p>
                 <div className="card-actions">

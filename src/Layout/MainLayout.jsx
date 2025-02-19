@@ -8,13 +8,14 @@ import { ToastContainer } from "react-toastify";
 
 const MainLayout = () => {
   const { loading } = useContext(AuthContext);
-  
 
   return (
     <div className="container min-h-screen flex flex-col font-display space-y-2 justify-between mx-auto">
-      <header>{!loading && <Header></Header>}</header>
+      <header>
+        <Header></Header>
+      </header>
       <ToastContainer position="top-center" />
-      <main className="mx-auto w-full">
+      <main className="mx-auto w-full text-center">
         {loading ? <Loading></Loading> : <Outlet />}
       </main>
       <footer>

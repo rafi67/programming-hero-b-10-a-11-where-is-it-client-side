@@ -12,6 +12,8 @@ const Home = () => {
     queryKey: ["items"],
     queryFn: async () =>
       await axios.get("http://localhost:5000/getItem").then((res) => res.data),
+    retry: 2,
+    refetchInterval:300000,
   });
 
   const [text] = useTypewriter({
@@ -20,7 +22,7 @@ const Home = () => {
   });
 
   if (isPending) {
-    return <Loading></Loading>;
+    return <Loading className="mx-auto"></Loading>;
   }
 
   if (error) {
@@ -48,7 +50,7 @@ const Home = () => {
                 </figure>
                 <div className="card-body items-start space-y-3">
                   <h2 className="card-title text-[#09080F] font-semibold text-2xl">{d.title}</h2>
-                  <p className="text-[#09080F99] text-xl font-medium">{d.description}</p>
+                  <p className="text-[#09080F99] text-xl font-medium text-left">{d.description}</p>
                   <div className="card-actions">
                     <button className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full">View Details</button>
                   </div>
