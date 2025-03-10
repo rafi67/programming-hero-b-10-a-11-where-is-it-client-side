@@ -17,7 +17,7 @@ const Register = () => {
 
     const form = new FormData(e.target);
     const name = form.get("name");
-
+    console.log('name', name);
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
 
     const email = form.get("email");
@@ -34,7 +34,7 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         setUser(result.user);
-        updateUserProfile({ display: name, photoURL: photo }).then(() => {
+        updateUserProfile({ displayName: name, photoURL: photo }).then(() => {
           navigate("/");
         });
       })

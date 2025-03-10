@@ -25,7 +25,6 @@ const Login = () => {
       .catch((err) => {
         toast.error(err.message);
       });
-    console.log(user);
   };
 
   const handleSubmit = (e) => {

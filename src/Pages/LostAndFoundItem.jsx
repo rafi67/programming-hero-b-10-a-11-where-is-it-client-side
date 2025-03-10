@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "./Loading";
-import { toast } from "react-toastify";
+import { Link } from "react-router";
 
 const LostAndFoundItem = () => {
   const { data, isPending, error } = useQuery({
@@ -10,16 +10,14 @@ const LostAndFoundItem = () => {
       await axios
         .get("http://localhost:5000/getAllItem", { withCredentials: true })
         .then((res) => res.data),
-    retry: 2,
-    refetchInterval:300000,
   });
 
   if (isPending) {
     return <Loading></Loading>;
   }
 
-  if(error) {
-    console.log('Lost and Found Item', error.message);
+  if (error) {
+    console.log("Lost and Found Item", error.message);
   }
 
   return (
@@ -46,9 +44,12 @@ const LostAndFoundItem = () => {
                   {d.description}
                 </p>
                 <div className="card-actions">
-                  <button className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full">
+                  <Link
+                    className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full"
+                    to={`/details/${d._id}`}
+                  >
                     View Details
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

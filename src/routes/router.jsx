@@ -7,6 +7,7 @@ import Register from "../Pages/Register";
 import AddLostAndFoundItem from "../Pages/AddLostAndFoundItem";
 import PrivateRoute from "./PrivateRoute";
 import LostAndFoundItem from "../Pages/LostAndFoundItem";
+import Details from "../Pages/Details";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/register",
-        element: <Register></Register>
+        element: <Register></Register>,
       },
       {
         path: "/addLostAndFoundItems",
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: "/lostAndFoundItems",
         element: <LostAndFoundItem></LostAndFoundItem>,
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivateRoute>
+            <Details></Details>
+          </PrivateRoute>
+        ),
       },
     ],
     errorElement: <PageNotFound></PageNotFound>,

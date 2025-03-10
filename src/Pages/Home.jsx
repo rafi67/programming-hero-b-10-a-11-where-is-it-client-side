@@ -11,9 +11,12 @@ const Home = () => {
   const { data, isPending, error } = useQuery({
     queryKey: ["items"],
     queryFn: async () =>
-      await axios.get("http://localhost:5000/getItem").then((res) => res.data),
-    retry: 2,
-    refetchInterval:300000,
+      await axios.get("http://localhost:5000/getItems")
+        .then((res) => res.data)
+        .catch(e => {
+          console.log(e);
+        }),
+    // refetchInterval: 300000,
   });
 
   const [text] = useTypewriter({
@@ -26,7 +29,7 @@ const Home = () => {
   }
 
   if (error) {
-    return <h1>Error</h1>;
+    return <h1>Error {error.message}</h1>;
   }
 
   return (
@@ -49,17 +52,25 @@ const Home = () => {
                   />
                 </figure>
                 <div className="card-body items-start space-y-3">
-                  <h2 className="card-title text-[#09080F] font-semibold text-2xl">{d.title}</h2>
-                  <p className="text-[#09080F99] text-xl font-medium text-left">{d.description}</p>
+                  <h2 className="card-title text-[#09080F] font-semibold text-2xl">
+                    {d.title}
+                  </h2>
+                  <p className="text-[#09080F99] text-xl font-medium text-left">
+                    {d.description}
+                  </p>
                   <div className="card-actions">
-                    <button className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full">View Details</button>
+                    <button className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full">
+                      View Details
+                    </button>
                   </div>
                 </div>
               </div>
             </>
           ))}
         </div>
-        <button className="btn border-2 border-[#9538E2] rounded-full text-[#9538E2] font-bold mt-12">See All</button>
+        <button className="btn border-2 border-[#9538E2] rounded-full text-[#9538E2] font-bold mt-12">
+          See All
+        </button>
       </section>
 
       {/* how to proceed section */}
@@ -119,7 +130,18 @@ const Home = () => {
       {/* About Section */}
       <section className="text-center mt-24 space-y-4">
         <h1 className="text-3xl text-[#09080F] font-bold">Where Is It</h1>
-        <p className="text-lg font-medium text-[#09080F99]">WhereIsIt is a Lost and Found web application designed to help users reconnect with their misplaced belongings. It provides a seamless platform where individuals can report lost items, list found objects, and browse a database to find matches. With secure communication features, users can connect with the rightful owners or finders to arrange safe item recovery. The app leverages a user-friendly interface, advanced search filters, and image uploads to enhance efficiency. **WhereIsIt** aims to simplify the lost-and-found process, reducing stress and increasing the chances of retrieving valuable possessions.</p>
+        <p className="text-lg font-medium text-[#09080F99]">
+          WhereIsIt is a Lost and Found web application designed to help users
+          reconnect with their misplaced belongings. It provides a seamless
+          platform where individuals can report lost items, list found objects,
+          and browse a database to find matches. With secure communication
+          features, users can connect with the rightful owners or finders to
+          arrange safe item recovery. The app leverages a user-friendly
+          interface, advanced search filters, and image uploads to enhance
+          efficiency. **WhereIsIt** aims to simplify the lost-and-found process,
+          reducing stress and increasing the chances of retrieving valuable
+          possessions.
+        </p>
       </section>
     </div>
   );

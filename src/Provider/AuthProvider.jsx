@@ -44,12 +44,11 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser?.email) {
         const email = currentUser.email;
-        axios
-          .post("http://localhost:5000/jwt", { withCredentials: true }, email)
-          .then((res) => {
-            console.log("login", res.data);
-            setLoading(false);
-          });
+        const user = { email: email };
+        axios.post(`http://localhost:5000/jwt`, user, { withCredentials: true }).then((res) => {
+          console.log("login", res);
+          setLoading(false);
+        });
       } else {
         axios
           .post(
