@@ -6,6 +6,7 @@ import { IoMdLogIn } from "react-icons/io";
 import { MdReport } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { VscDebugDisconnect } from "react-icons/vsc";
+import { Link } from "react-router";
 
 const Home = () => {
 
@@ -60,18 +61,21 @@ const Home = () => {
                     {d.description}
                   </p>
                   <div className="card-actions">
-                    <button className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full">
-                      View Details
-                    </button>
+                  <Link
+                    className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full"
+                    to={`/details/${d._id}`}
+                  >
+                    View Details
+                  </Link>
                   </div>
                 </div>
               </div>
             </>
           ))}
         </div>
-        <button className="btn border-2 border-[#9538E2] rounded-full text-[#9538E2] font-bold mt-12">
+        <Link className="btn border-2 border-[#9538E2] rounded-full text-[#9538E2] font-bold mt-12" to='/lostAndFoundItems'>
           See All
-        </button>
+        </Link>
       </section>
 
       {/* how to proceed section */}
