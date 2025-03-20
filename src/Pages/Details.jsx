@@ -3,18 +3,15 @@ import DatePicker from "react-datepicker";
 import { useParams } from "react-router";
 import Loading from "./Loading";
 import { useQuery } from "@tanstack/react-query";
-import { AuthContext } from "../Provider/AuthProvider";
-import { useContext } from "react";
 
 const Details = () => {
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
   axios.defaults.withCredentials = true;
   const { data, isPending, error } = useQuery({
     queryKey: ["items"],
     queryFn: async () =>
       await axios
-        .post(`http://localhost:5000/getItem/${id}`, { email: user.email })
+        .post(`http://localhost:5000/getItem/${id}`,)
         .then((res) => res.data),
   });
 

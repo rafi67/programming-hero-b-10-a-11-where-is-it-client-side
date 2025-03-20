@@ -8,15 +8,16 @@ import { BsSearch } from "react-icons/bs";
 import { VscDebugDisconnect } from "react-icons/vsc";
 
 const Home = () => {
-  const { data, isPending, error } = useQuery({
-    queryKey: ["items"],
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["home"],
     queryFn: async () =>
       await axios.get("http://localhost:5000/getItems")
         .then((res) => res.data)
         .catch(e => {
           console.log(e);
         }),
-    // refetchInterval: 300000,
+    refetchInterval: 300000,
   });
 
   const [text] = useTypewriter({
@@ -24,7 +25,7 @@ const Home = () => {
     loop: true,
   });
 
-  if (isPending) {
+  if (isLoading) {
     return <Loading className="mx-auto"></Loading>;
   }
 
@@ -121,7 +122,7 @@ const Home = () => {
             </h1>
             <p className="text-lg font-medium">
               Send secure messages through the platform to safely connect with
-              the item's owner or finder.
+              the items owner or finder.
             </p>
           </div>
         </div>

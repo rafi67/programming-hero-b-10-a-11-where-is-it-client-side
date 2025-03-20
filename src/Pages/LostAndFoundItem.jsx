@@ -5,11 +5,12 @@ import { Link } from "react-router";
 
 const LostAndFoundItem = () => {
   const { data, isPending, error } = useQuery({
-    queryKey: ["items"],
+    queryKey: ["page"],
     queryFn: async () =>
       await axios
         .get("http://localhost:5000/getAllItem", { withCredentials: true })
         .then((res) => res.data),
+        refetchInterval: 300000,
   });
 
   if (isPending) {
