@@ -1,17 +1,48 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 
 const AddLostAndFoundItem = () => {
-
   const [startDate, setStartDate] = useState(new Date());
+  const { user } = useContext(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = {
+      postType: formData.get("postType"),
+      thumbnail: formData.get("thumbnail"),
+      title: formData.get("title"),
+      description: formData.get("description"),
+      category: formData.get("category"),
+      location: formData.get("location"),
+      date: startDate.toLocaleDateString("en-US"),
+      contactInformation: {
+        displayName: user.displayName,
+        email: user.email,
+      },
+    };
+
+    axios
+      .post("http://localhost:5000/addItems", { withCredentials: true }, data)
+      .then((res) => {
+        alert(res.message);
+        formData.reset();
+      });
+  };
 
   return (
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mb-1.5 p-0 mx-auto">
-      <form className="card-body">
+      <form className="card-body" onSubmit={handleSubmit}>
         <fieldset className="fieldset">
           <label className="fieldset-label">Post Type</label>
-          <select defaultValue="Select Post Type" className="select" name="postType">
+          <select
+            defaultValue="Select Post Type"
+            className="select"
+            name="postType"
+          >
             <option disabled={true} selected={true}>
               Select Post Type
             </option>
@@ -32,14 +63,13 @@ const AddLostAndFoundItem = () => {
             placeholder="Title"
             name="title"
           />
-          <fieldset className="fieldset">
-            <label className="fieldset-label">Description</label>
-            <textarea
-              className="textarea h-24 resize-none"
-              placeholder="Description"
-              name="description"
-            ></textarea>
-          </fieldset>
+          <label className="fieldset-label">Description</label>
+          <textarea
+            className="textarea h-24 resize-none"
+            placeholder="Description"
+            name="description"
+          ></textarea>
+          <label className="fieldset-label">Category</label>
           <select
             defaultValue="Select Category"
             className="select"
@@ -52,6 +82,7 @@ const AddLostAndFoundItem = () => {
             <option value="Documents">Documents</option>
             <option value="Gadgets">Gadgets</option>
           </select>
+
           <label className="fieldset-label">Location</label>
           <input
             type="text"
@@ -60,22 +91,13 @@ const AddLostAndFoundItem = () => {
             name="location"
           />
           <label className="fieldset-label">Date Lost Or Found</label>
-          <DatePicker showIcon placeholderText="Select Date" className="input" selected={startDate} onChange={(date) => setStartDate(date)}></DatePicker>
-          <label className="fieldset-label">Contact Information</label>
-          <input
-            type="text"
+          <DatePicker
+            showIcon
+            placeholderText="Select Date"
             className="input"
-            placeholder="Name"
-            name="displayName"
-            readOnly
-          />
-          <input
-            type="email"
-            className="input"
-            placeholder="Email"
-            name="email"
-            readOnly
-          />
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          ></DatePicker>
           <button className="btn btn-neutral mt-4">Add</button>
         </fieldset>
       </form>
