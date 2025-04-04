@@ -26,7 +26,7 @@ const AddLostAndFoundItem = () => {
     };
 
     axios
-      .post("http://localhost:5000/addItems", { withCredentials: true }, data)
+      .post("http://localhost:5000/addItems", data, { withCredentials: true })
       .then((res) => {
         alert(res.message);
         formData.reset();
