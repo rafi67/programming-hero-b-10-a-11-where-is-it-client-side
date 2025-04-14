@@ -8,6 +8,7 @@ import AddLostAndFoundItem from "../Pages/AddLostAndFoundItem";
 import PrivateRoute from "./PrivateRoute";
 import LostAndFoundItem from "../Pages/LostAndFoundItem";
 import Details from "../Pages/Details";
+import ManageMyItems from "../Pages/ManageMyItems";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddLostAndFoundItem></AddLostAndFoundItem>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/manageMyItems",
+        element: (
+          <PrivateRoute>
+            <ManageMyItems></ManageMyItems>
           </PrivateRoute>
         ),
       },
