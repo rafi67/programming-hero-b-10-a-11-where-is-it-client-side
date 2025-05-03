@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
-  const { userLogin, userLoginWithGoogle, setUser, user } = useContext(AuthContext);
+  const { userLogin, userLoginWithGoogle, setUser } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 

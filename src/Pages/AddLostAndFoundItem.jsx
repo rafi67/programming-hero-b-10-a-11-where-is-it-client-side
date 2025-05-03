@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddLostAndFoundItem = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -10,7 +11,8 @@ const AddLostAndFoundItem = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const form = document.getElementById('my-form');
+    const formData = new FormData(form);
     const data = {
       postType: formData.get("postType"),
       thumbnail: formData.get("thumbnail"),
@@ -28,14 +30,20 @@ const AddLostAndFoundItem = () => {
     axios
       .post("http://localhost:5000/addItems", data, { withCredentials: true })
       .then((res) => {
-        alert(res.message);
-        formData.reset();
+        setStartDate(new Date());
+        form.reset();
+        if(res.data.acknowledged) {
+          toast.success('Added Successfully');
+        }
+        else {
+          toast.error('Failed');
+        }
       });
   };
 
   return (
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mb-1.5 p-0 mx-auto">
-      <form className="card-body" onSubmit={handleSubmit}>
+      <form id='my-form' className="card-body" onSubmit={handleSubmit}>
         <fieldset className="fieldset">
           <label className="fieldset-label">Post Type</label>
           <select
