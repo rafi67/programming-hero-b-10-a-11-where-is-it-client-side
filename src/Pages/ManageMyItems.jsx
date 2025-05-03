@@ -3,6 +3,9 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Loading from "./Loading";
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const ManageMyItems = () => {
   const { user } = useContext(AuthContext);
@@ -11,11 +14,44 @@ const ManageMyItems = () => {
     email: user.email,
   };
 
-  const print = () => {
-    console.log('data:', data);
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/deleteItem/${id}`, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log('response', res);
+            if (res.data.acknowledged) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your item has been deleted.",
+                icon: "success",
+              });
+              refetch();
+            }
+            else {
+              Swal.fire({
+                title: "Oops...",
+                text: "Something went wrong!",
+                icon: "error",
+              });
+            }
+          });
+      }
+    });
   };
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, isPending, error, refetch } = useQuery({
     queryKey: ["manageItems"],
     queryFn: async () =>
       await axios
@@ -24,16 +60,16 @@ const ManageMyItems = () => {
         })
         .then((res) => res.data)
         .catch((e) => {
-          console.log('error from react query', e);
+          console.log("error from react query", e);
         }),
-    refetchInterval: 300000,
+    // refetchInterval: 300000,
   });
 
-  if (isLoading) {
+  if (isLoading || isPending) {
     return <Loading></Loading>;
   }
 
-  if(error) {
+  if (error) {
     return <p>{error.message}</p>;
   }
 
@@ -55,50 +91,57 @@ const ManageMyItems = () => {
               <th>Category</th>
               <th>Location</th>
               <th>Date</th>
+              <th>Update</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            {data.map((d) => {
-              <tr key={d._id}>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={d.thumbnail}
-                          alt="Avatar Tailwind CSS Component"
-                        />
+            {data.map((d) => (
+              <>
+                <tr key={d._id}>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img src={`${d.thumbnail}`} alt="Item" />
+                        </div>
                       </div>
                     </div>
-                    <div>
-                      <div className="font-bold">Hart Hagerty</div>
-                      <div className="text-sm opacity-50">United States</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  Zemlak, Daniel and Leannon
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    Desktop Support Technician
-                  </span>
-                </td>
-                <td>Purple</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
-                </th>
-              </tr>;
-            })}
+                  </td>
+                  <td>{`${d.postType}`}</td>
+                  <td>{`${d.title}`}</td>
+                  <td>{`${d.description}`}</td>
+                  <td>{`${d.category}`}</td>
+                  <td>{`${d.location}`}</td>
+                  <td>{`${d.date}`}</td>
+                  <th>
+                    <button className="btn btn-ghost btn-xs">
+                      <MdEdit />
+                    </button>
+                  </th>
+                  <th>
+                    <button
+                      className="btn btn-ghost btn-xs"
+                      onClick={() => handleDelete(d._id)}
+                    >
+                      <MdDelete />
+                    </button>
+                  </th>
+                </tr>
+              </>
+            ))}
           </tbody>
           {/* foot */}
           <tfoot>
             <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
-              <th></th>
+              <th>Image</th>
+              <th>Post Type</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Location</th>
+              <th>Date</th>
             </tr>
           </tfoot>
         </table>
