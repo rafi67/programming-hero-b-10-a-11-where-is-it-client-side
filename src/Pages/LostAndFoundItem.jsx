@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "./Loading";
 import { Link } from "react-router";
@@ -10,8 +10,14 @@ const LostAndFoundItem = () => {
       await axios
         .get("http://localhost:5000/getAllItem", { withCredentials: true })
         .then((res) => res.data),
-        refetchInterval: 300000,
+    refetchInterval: 300000,
   });
+
+  const query = useQueryClient();
+
+  const resetDetails = () => {
+    query.removeQueries("details");
+  };
 
   if (isPending) {
     return <Loading></Loading>;
@@ -48,6 +54,7 @@ const LostAndFoundItem = () => {
                   <Link
                     className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full"
                     to={`/details/${d._id}`}
+                    onClick={resetDetails}
                   >
                     View Details
                   </Link>

@@ -3,9 +3,8 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Loading from "./Loading";
-import { MdEdit } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const ManageMyItems = () => {
   const { user } = useContext(AuthContext);
@@ -62,7 +61,6 @@ const ManageMyItems = () => {
         .catch((e) => {
           console.log("error from react query", e);
         }),
-    // refetchInterval: 300000,
   });
 
   if (isLoading || isPending) {
@@ -142,6 +140,8 @@ const ManageMyItems = () => {
               <th>Category</th>
               <th>Location</th>
               <th>Date</th>
+              <th>Update</th>
+              <th>Delete</th>
             </tr>
           </tfoot>
         </table>

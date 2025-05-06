@@ -8,12 +8,14 @@ const Details = () => {
   const { id } = useParams();
   axios.defaults.withCredentials = true;
   const { data, isPending, error } = useQuery({
-    queryKey: ["items"],
+    queryKey: ["details"],
     queryFn: async () =>
       await axios
         .post(`http://localhost:5000/getItem/${id}`,)
         .then((res) => res.data),
   });
+
+  console.log(data);
 
   if (isPending) {
     return <Loading></Loading>;
@@ -40,6 +42,9 @@ const Details = () => {
             </option>
             <option value="Lost" disabled={true}>
               Lost
+            </option>
+            <option value="Others" disabled={true}>
+              Others
             </option>
           </select>
           <label className="fieldset-label">Thumbnail</label>
@@ -72,11 +77,13 @@ const Details = () => {
               defaultValue={data.category}
               className="select"
               name="category"
+              readOnly
             >
               <option disabled={true}>Select Category</option>
-              <option value="Pets">Pets</option>
-              <option value="Documents">Documents</option>
-              <option value="Gadgets">Gadgets</option>
+              <option value="Pets" disabled={true}>Pets</option>
+              <option value="Documents" disabled={true}>Documents</option>
+              <option value="Gadgets" disabled={true}>Gadgets</option>
+              <option value="Others" disabled={true}>Others</option>
             </select>
           </fieldset>
           <fieldset className="fieldset">

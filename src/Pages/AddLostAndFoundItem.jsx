@@ -11,7 +11,7 @@ const AddLostAndFoundItem = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = document.getElementById('my-form');
+    const form = document.getElementById("my-form");
     const formData = new FormData(form);
     const data = {
       postType: formData.get("postType"),
@@ -27,23 +27,33 @@ const AddLostAndFoundItem = () => {
       },
     };
 
-    axios
-      .post("http://localhost:5000/addItems", data, { withCredentials: true })
-      .then((res) => {
-        setStartDate(new Date());
-        form.reset();
-        if(res.data.acknowledged) {
-          toast.success('Added Successfully');
-        }
-        else {
-          toast.error('Failed');
-        }
-      });
+    if (
+      !formData.has("postType") ||
+      !formData.has("thumbnail") ||
+      !formData.has("title") ||
+      !formData.has("description") ||
+      !formData.has("category") ||
+      !formData.has("location")
+    ) {
+      toast.error("Please fill the form!");
+    } else {
+      axios
+        .post("http://localhost:5000/addItems", data, { withCredentials: true })
+        .then((res) => {
+          setStartDate(new Date());
+          form.reset();
+          if (res.data.acknowledged) {
+            toast.success("Added Successfully");
+          } else {
+            toast.error("Failed");
+          }
+        });
+    }
   };
 
   return (
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mb-1.5 p-0 mx-auto">
-      <form id='my-form' className="card-body" onSubmit={handleSubmit}>
+      <form id="my-form" className="card-body" onSubmit={handleSubmit}>
         <fieldset className="fieldset">
           <label className="fieldset-label">Post Type</label>
           <select
@@ -89,6 +99,7 @@ const AddLostAndFoundItem = () => {
             <option value="Pets">Pets</option>
             <option value="Documents">Documents</option>
             <option value="Gadgets">Gadgets</option>
+            <option value="Others">Others</option>
           </select>
 
           <label className="fieldset-label">Location</label>
@@ -98,11 +109,11 @@ const AddLostAndFoundItem = () => {
             placeholder="Location"
             name="location"
           />
-          <label className="fieldset-label">Date Lost Or Found</label>
+          <label className="fieldset-label">Date</label>
           <DatePicker
             showIcon
             placeholderText="Select Date"
-            className="input"
+            className="border-2 border-gray-200"
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           ></DatePicker>
