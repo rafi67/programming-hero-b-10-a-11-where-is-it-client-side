@@ -4,13 +4,15 @@ import Loading from "./Loading";
 import { Link } from "react-router";
 
 const LostAndFoundItem = () => {
+
+  
   const { data, isPending, error } = useQuery({
     queryKey: ["page"],
     queryFn: async () =>
       await axios
         .get("http://localhost:5000/getAllItem", { withCredentials: true })
         .then((res) => res.data),
-    refetchInterval: 300000,
+        refetchInterval: 300000,
   });
 
   const query = useQueryClient();
@@ -53,8 +55,7 @@ const LostAndFoundItem = () => {
                 <div className="card-actions">
                   <Link
                     className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full"
-                    to={`/details/${d._id}`}
-                    onClick={resetDetails}
+                    to={`/details/${d._id}`} onClick={resetDetails}
                   >
                     View Details
                   </Link>

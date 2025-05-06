@@ -15,8 +15,6 @@ const Details = () => {
         .then((res) => res.data),
   });
 
-  console.log(data);
-
   if (isPending) {
     return <Loading></Loading>;
   }

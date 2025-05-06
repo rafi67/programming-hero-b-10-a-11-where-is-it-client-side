@@ -50,7 +50,6 @@ const Home = () => {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {data.map((d) => (
-            <>
               <div key={d._id} className="card bg-base-100 w-96 shadow-xl">
                 <figure className="px-10 pt-10">
                   <img
@@ -77,7 +76,6 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            </>
           ))}
         </div>
         <Link

@@ -96,7 +96,6 @@ const ManageMyItems = () => {
           <tbody>
             {/* row 1 */}
             {data.map((d) => (
-              <>
                 <tr key={d._id}>
                   <td>
                     <div className="flex items-center gap-3">
@@ -127,7 +126,6 @@ const ManageMyItems = () => {
                     </button>
                   </th>
                 </tr>
-              </>
             ))}
           </tbody>
           {/* foot */}
