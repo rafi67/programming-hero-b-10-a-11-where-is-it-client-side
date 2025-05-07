@@ -21,6 +21,7 @@ const AddLostAndFoundItem = () => {
       category: formData.get("category"),
       location: formData.get("location"),
       date: startDate.toLocaleDateString("en-US"),
+      recovered: false,
       contactInformation: {
         displayName: user.displayName,
         email: user.email,
