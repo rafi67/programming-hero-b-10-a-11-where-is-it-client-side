@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import Loading from "./Loading";
 import Swal from "sweetalert2";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { Link } from "react-router";
 
 const ManageMyItems = () => {
   const { user } = useContext(AuthContext);
@@ -113,9 +114,9 @@ const ManageMyItems = () => {
                   <td>{`${d.location}`}</td>
                   <td>{`${d.date}`}</td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">
+                    <Link className="btn btn-ghost btn-xs" to={`/updateItem/${d._id}`}>
                       <MdEdit />
-                    </button>
+                    </Link>
                   </th>
                   <th>
                     <button

@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 const Details = () => {
   const { id } = useParams();
-  axios.defaults.withCredentials = true;
   const { data, isPending, error } = useQuery({
     queryKey: ["details"],
     queryFn: async () =>
@@ -53,7 +52,7 @@ const Details = () => {
   }
 
   if (error) {
-    console.log("error from details page", error.message);
+    toast.error("error from details page", error.message);
   }
 
   return (
