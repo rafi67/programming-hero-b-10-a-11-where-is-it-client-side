@@ -39,7 +39,7 @@ const Details = () => {
               withCredentials: true,
             })
             .then((res) => {
-              if (res.status !== 200)
+              if (res.status === 200)
                 toast.success("Successfully added to Recovered Item");
               else toast.error("Failed to add to the Recovered Item");
             });
@@ -52,7 +52,7 @@ const Details = () => {
   }
 
   if (error) {
-    toast.error("error from details page", error.message);
+    toast.error(`error from details page ${error.message}`);
   }
 
   return (

@@ -10,6 +10,7 @@ import LostAndFoundItem from "../Pages/LostAndFoundItem";
 import Details from "../Pages/Details";
 import ManageMyItems from "../Pages/ManageMyItems";
 import EditLostAndFoundItem from "../Pages/EditLostAndFoundItem";
+import AllRecoveredItems from "../Pages/AllRecoveredItems";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Details></Details>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/allRecoveredItems",
+        element: (
+          <PrivateRoute>
+            <AllRecoveredItems></AllRecoveredItems>
           </PrivateRoute>
         ),
       },
