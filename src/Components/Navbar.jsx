@@ -38,6 +38,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link className="btn btn-ghost text-xl" to="/">
+        <img src="https://img.icons8.com/?size=100&id=B5GsL9WNW5NE&format=png&color=000000" alt="" className="w-[20%]" />
           WhereIsIt
         </Link>
       </div>

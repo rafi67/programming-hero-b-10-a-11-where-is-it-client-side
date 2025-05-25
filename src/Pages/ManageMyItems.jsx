@@ -6,6 +6,8 @@ import Loading from "./Loading";
 import Swal from "sweetalert2";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from "react-router";
+import Lottie from "lottie-react";
+import NoDataFound from '../noDataFound.json';
 
 const ManageMyItems = () => {
   const { user } = useContext(AuthContext);
@@ -72,8 +74,8 @@ const ManageMyItems = () => {
     return <p>{error.message}</p>;
   }
 
-  if (data.length === null) {
-    return <p>No Item found or lost yet</p>;
+  if (data?.length === 0) {
+    return <Lottie className="w-[25%] mx-auto" animationData={NoDataFound}/>;
   }
 
   return (
