@@ -3,9 +3,9 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Loading from "./Loading";
-import { MdEdit } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { Link } from "react-router";
 
 const ManageMyItems = () => {
   const { user } = useContext(AuthContext);
@@ -62,7 +62,6 @@ const ManageMyItems = () => {
         .catch((e) => {
           console.log("error from react query", e);
         }),
-    // refetchInterval: 300000,
   });
 
   if (isLoading || isPending) {
@@ -98,7 +97,6 @@ const ManageMyItems = () => {
           <tbody>
             {/* row 1 */}
             {data.map((d) => (
-              <>
                 <tr key={d._id}>
                   <td>
                     <div className="flex items-center gap-3">
@@ -116,9 +114,9 @@ const ManageMyItems = () => {
                   <td>{`${d.location}`}</td>
                   <td>{`${d.date}`}</td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">
+                    <Link className="btn btn-ghost btn-xs" to={`/updateItem/${d._id}`}>
                       <MdEdit />
-                    </button>
+                    </Link>
                   </th>
                   <th>
                     <button
@@ -129,7 +127,6 @@ const ManageMyItems = () => {
                     </button>
                   </th>
                 </tr>
-              </>
             ))}
           </tbody>
           {/* foot */}
@@ -142,6 +139,8 @@ const ManageMyItems = () => {
               <th>Category</th>
               <th>Location</th>
               <th>Date</th>
+              <th>Update</th>
+              <th>Delete</th>
             </tr>
           </tfoot>
         </table>

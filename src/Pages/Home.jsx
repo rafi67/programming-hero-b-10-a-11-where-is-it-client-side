@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 import Loading from "./Loading";
@@ -9,17 +9,23 @@ import { VscDebugDisconnect } from "react-icons/vsc";
 import { Link } from "react-router";
 
 const Home = () => {
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["home"],
     queryFn: async () =>
-      await axios.get("http://localhost:5000/getItems")
+      await axios
+        .get("http://localhost:5000/getItems")
         .then((res) => res.data)
-        .catch(e => {
+        .catch((e) => {
           console.log(e);
         }),
     refetchInterval: 300000,
   });
+
+  const query = useQueryClient();
+
+  const resetDetails = () => {
+    query.removeQueries("details");
+  };
 
   const [text] = useTypewriter({
     words: ["Help People to find their stuff"],
@@ -44,7 +50,6 @@ const Home = () => {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {data.map((d) => (
-            <>
               <div key={d._id} className="card bg-base-100 w-96 shadow-xl">
                 <figure className="px-10 pt-10">
                   <img
@@ -61,19 +66,22 @@ const Home = () => {
                     {d.description}
                   </p>
                   <div className="card-actions">
-                  <Link
-                    className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full"
-                    to={`/details/${d._id}`}
-                  >
-                    View Details
-                  </Link>
+                    <Link
+                      onClick={resetDetails}
+                      className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full"
+                      to={`/details/${d._id}`}
+                    >
+                      View Details
+                    </Link>
                   </div>
                 </div>
               </div>
-            </>
           ))}
         </div>
-        <Link className="btn border-2 border-[#9538E2] rounded-full text-[#9538E2] font-bold mt-12" to='/lostAndFoundItems'>
+        <Link
+          className="btn border-2 border-[#9538E2] rounded-full text-[#9538E2] font-bold mt-12"
+          to="/lostAndFoundItems"
+        >
           See All
         </Link>
       </section>

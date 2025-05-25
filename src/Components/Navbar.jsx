@@ -33,7 +33,7 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link>Lost & Found Items</Link>
+              <Link to={'/lostAndFoundItems'}>Lost & Found Items</Link>
             </li>
           </ul>
         </div>
@@ -79,7 +79,7 @@ const Navbar = () => {
                 <Link to='/addLostAndFoundItems'>Add Lost & Found Items</Link>
               </li>
               <li>
-                <a>All Recovered Items</a>
+                <Link to={'/allRecoveredItems'}>All Recovered Items</Link>
               </li>
               <li>
                 <Link to='/manageMyItems'>Manage My Items</Link>
