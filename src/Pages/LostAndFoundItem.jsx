@@ -2,9 +2,12 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "./Loading";
 import { Link } from "react-router";
+import Lottie from "lottie-react";
+import Search from "../search.json";
+import { useState } from "react";
 
 const LostAndFoundItem = () => {
-
+  const [isFound, setIsFound] = useState(true);
   const { data, isPending, error, refetch } = useQuery({
     queryKey: ["page"],
     queryFn: async () =>
@@ -15,16 +18,18 @@ const LostAndFoundItem = () => {
     refetchOnWindowFocus: false,
   });
 
-  const search = e => {
-    e.preventDefault();
-    const input = e.target.value.toLowerCase();
-    
+  const search = (e) => {
+    let input = e.target.value.toLowerCase();
+    input = input.replace(/^\s+|\s+$/g, "");
+
     const result = data.filter(
-      d =>
+      (d) =>
         d.title.toLowerCase() === input || d.location.toLowerCase() === input
     );
-    if(result.length!==0) query.setQueryData(['page'], result);
-    else refetch();
+    if (result.length !== 0) {
+      setIsFound(true);
+      query.setQueryData(["page"], result);
+    } else setIsFound(false);
   };
 
   const query = useQueryClient();
@@ -70,8 +75,9 @@ const LostAndFoundItem = () => {
       <h1 className="text-4xl text-center font-extrabold text-[#0B0B0B]">
         Lost & Found Items
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {data.map((d) => (
+      {isFound ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {data.map((d) => (
             <div key={d._id} className="card bg-base-100 shadow-xl">
               <figure className="px-10 pt-10">
                 <img
@@ -98,8 +104,22 @@ const LostAndFoundItem = () => {
                 </div>
               </div>
             </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="">
+          <Lottie className="w-screen h-screen" animationData={Search} />
+          <button
+            className="btn btn-primary rounded-3xl"
+            onClick={() => {
+              setIsFound(true);
+              refetch();
+            }}
+          >
+            Refresh
+          </button>
+        </div>
+      )}
     </div>
   );
 };
