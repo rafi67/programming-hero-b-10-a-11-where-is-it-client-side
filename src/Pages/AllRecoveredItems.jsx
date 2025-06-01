@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import RecoveredItemCard from "../Components/RecoveredItemCard";
 import RecoveredItemTable from "../Components/RecoveredItemTable";
+import DataNotFound from "./DataNotFound";
 
 const AllRecoveredItems = () => {
   const [isCard, setIsCard] = useState(false);
@@ -31,6 +32,8 @@ const AllRecoveredItems = () => {
     toast.error(error.message);
     return;
   }
+
+  if(data.length===0) return <DataNotFound/>
 
   return (
     <div>

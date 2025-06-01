@@ -108,7 +108,7 @@ const LostAndFoundItem = () => {
         </div>
       ) : (
         <div className="">
-          <Lottie className="w-screen h-screen" animationData={Search} />
+          <Lottie className="w-[30%] mx-auto" animationData={Search} />
           <button
             className="btn btn-primary rounded-3xl"
             onClick={() => {
