@@ -7,13 +7,18 @@ import { MdReport } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { VscDebugDisconnect } from "react-icons/vsc";
 import { Link } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Home = () => {
+  const { url } = useContext(AuthContext);
+
   const { data, isLoading, error } = useQuery({
     queryKey: ["home"],
     queryFn: async () =>
       await axios
-        .get("http://localhost:5000/getItems")
+        .get(url+"getItems")
         .then((res) => res.data)
         .catch((e) => {
           console.log(e);
@@ -37,7 +42,7 @@ const Home = () => {
   }
 
   if (error) {
-    return <h1>Error {error.message}</h1>;
+    toast.error(error.message);
   }
 
   return (

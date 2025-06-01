@@ -16,6 +16,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const url = 'http://localhost:5000/'
 
   const provider = new GoogleAuthProvider();
 
@@ -80,6 +81,7 @@ const AuthProvider = ({ children }) => {
     userLoginWithGoogle,
     logOut,
     updateUserProfile,
+    url,
   };
 
   return (

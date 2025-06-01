@@ -9,7 +9,7 @@ import { Link } from "react-router";
 import DataNotFound from "./DataNotFound";
 
 const ManageMyItems = () => {
-  const { user } = useContext(AuthContext);
+  const { user, url } = useContext(AuthContext);
   const u = {
     displayName: user.displayName,
     email: user.email,
@@ -27,7 +27,7 @@ const ManageMyItems = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/deleteItem/${id}`, {
+          .delete(`${url}deleteItem/${id}`, {
             withCredentials: true,
           })
           .then((res) => {

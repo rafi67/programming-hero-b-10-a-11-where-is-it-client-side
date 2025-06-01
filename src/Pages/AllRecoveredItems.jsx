@@ -2,20 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Loading from "./Loading";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import RecoveredItemCard from "../Components/RecoveredItemCard";
 import RecoveredItemTable from "../Components/RecoveredItemTable";
 import DataNotFound from "./DataNotFound";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const AllRecoveredItems = () => {
   const [isCard, setIsCard] = useState(false);
+  const { url:apiURL } = useContext(AuthContext);
 
   const { data, isPending, error } = useQuery({
     queryKey: ["recoveredItems", isCard],
     queryFn: async () => {
       const url = isCard
-        ? "http://localhost:5000/getRecoveredItemAndDetails"
-        : "http://localhost:5000/getRecoveredItems";
+        ? apiURL+"getRecoveredItemAndDetails"
+        : apiURL+"getRecoveredItems";
 
       return await axios
         .get(url, {
