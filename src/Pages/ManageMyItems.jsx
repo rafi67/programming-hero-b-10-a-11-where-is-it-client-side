@@ -27,7 +27,7 @@ const ManageMyItems = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`${url}deleteItem/${id}`, {
+          .delete(`${url}deleteItem/${id}`, u, {
             withCredentials: true,
           })
           .then((res) => {
@@ -56,7 +56,7 @@ const ManageMyItems = () => {
     queryKey: ["manageItems"],
     queryFn: async () =>
       await axios
-        .post(`http://localhost:5000/getMyItem/`, u, {
+        .post(`${url}getMyItem/`, u, {
           withCredentials: true,
         })
         .then((res) => res.data)

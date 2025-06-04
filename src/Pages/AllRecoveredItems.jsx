@@ -39,7 +39,7 @@ const AllRecoveredItems = () => {
 
   return (
     <div>
-      <div className="text-right">
+      <div className="text-right space-x-1.5">
         <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
           <img
             src="https://img.icons8.com/?size=100&id=11393&format=png&color=000000"
