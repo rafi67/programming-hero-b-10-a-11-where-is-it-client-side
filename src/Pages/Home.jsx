@@ -21,7 +21,7 @@ const Home = () => {
         .get(url+"getItems")
         .then((res) => res.data)
         .catch((e) => {
-          console.log(e);
+          toast.error(e.message);
         }),
     refetchInterval: 300000,
   });

@@ -6,6 +6,7 @@ import Lottie from "lottie-react";
 import Search from "../search.json";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const LostAndFoundItem = () => {
   const { url } = useContext(AuthContext);
@@ -45,7 +46,7 @@ const LostAndFoundItem = () => {
   }
 
   if (error) {
-    console.log("Lost and Found Item", error.message);
+    toast.error(error.message);
   }
 
   return (

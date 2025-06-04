@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from "react-router";
 import DataNotFound from "./DataNotFound";
+import { toast } from "react-toastify";
 
 const ManageMyItems = () => {
   const { user, url } = useContext(AuthContext);
@@ -31,7 +32,6 @@ const ManageMyItems = () => {
             withCredentials: true,
           })
           .then((res) => {
-            console.log('response', res);
             if (res.data.acknowledged) {
               Swal.fire({
                 title: "Deleted!",
@@ -61,7 +61,7 @@ const ManageMyItems = () => {
         })
         .then((res) => res.data)
         .catch((e) => {
-          console.log("error from react query", e);
+          toast.error(e.message);
         }),
   });
 
