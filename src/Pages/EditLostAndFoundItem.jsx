@@ -9,7 +9,7 @@ import Loading from "./Loading";
 
 const EditLostAndFoundItem = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const { user } = useContext(AuthContext);
+  const { user, url } = useContext(AuthContext);
 
   const { id } = useParams();
 
@@ -17,7 +17,7 @@ const EditLostAndFoundItem = () => {
     queryKey: ["details"],
     queryFn: async () =>
       await axios
-        .get(`http://localhost:5000/getItem/${id}`, { withCredentials: true })
+        .get(`${url}getItem/${id}`, { withCredentials: true })
         .then((res) => res.data),
   });
 
@@ -41,7 +41,7 @@ const EditLostAndFoundItem = () => {
     };
 
     axios
-      .put(`http://localhost:5000/updateItems/${id}`, updateItem, {
+      .put(`${url}updateItems/${id}`, updateItem, {
         withCredentials: true,
       })
       .then((res) => {

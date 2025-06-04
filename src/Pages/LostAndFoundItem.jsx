@@ -4,15 +4,18 @@ import Loading from "./Loading";
 import { Link } from "react-router";
 import Lottie from "lottie-react";
 import Search from "../search.json";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const LostAndFoundItem = () => {
+  const { url } = useContext(AuthContext);
   const [isFound, setIsFound] = useState(true);
   const { data, isPending, error, refetch } = useQuery({
     queryKey: ["page"],
     queryFn: async () =>
       await axios
-        .get("http://localhost:5000/getAllItem", { withCredentials: true })
+        .get(url+"getAllItem", { withCredentials: true })
         .then((res) => res.data),
     refetchInterval: 300000,
     refetchOnWindowFocus: false,
@@ -43,7 +46,7 @@ const LostAndFoundItem = () => {
   }
 
   if (error) {
-    console.log("Lost and Found Item", error.message);
+    toast.error(error.message);
   }
 
   return (

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const AddLostAndFoundItem = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const { user } = useContext(AuthContext);
+  const { user, url } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ const AddLostAndFoundItem = () => {
       toast.error("Please fill the form!");
     } else {
       axios
-        .post("http://localhost:5000/addItems", data, { withCredentials: true })
+        .post(url+"addItems", data, { withCredentials: true })
         .then((res) => {
           setStartDate(new Date());
           form.reset();

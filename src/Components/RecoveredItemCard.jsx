@@ -2,8 +2,6 @@ import PropTypes from "prop-types";
 
 const RecoveredItemCard = ({data}) => {
 
-  console.log('recovered item card data', data);
-
   return (
         
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mx-auto">

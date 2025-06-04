@@ -16,6 +16,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const url = 'http://localhost:5000/'
 
   const provider = new GoogleAuthProvider();
 
@@ -45,9 +46,8 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         const email = currentUser.email;
         const user = { email: email };
-        axios.post(`http://localhost:5000/jwt`, user, { withCredentials: true }).then((res) => {
+        axios.post(`http://localhost:5000/jwt`, user, { withCredentials: true }).then(() => {
           setLoading(false);
-          console.log(res.status);
         });
       } else {
         axios
@@ -58,8 +58,7 @@ const AuthProvider = ({ children }) => {
               withCredentials: true,
             }
           )
-          .then((res) => {
-            console.log("logout", res.data);
+          .then(() => {
             setLoading(false);
           });
       }
@@ -80,6 +79,7 @@ const AuthProvider = ({ children }) => {
     userLoginWithGoogle,
     logOut,
     updateUserProfile,
+    url,
   };
 
   return (

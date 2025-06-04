@@ -7,9 +7,10 @@ import Swal from "sweetalert2";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from "react-router";
 import DataNotFound from "./DataNotFound";
+import { toast } from "react-toastify";
 
 const ManageMyItems = () => {
-  const { user } = useContext(AuthContext);
+  const { user, url } = useContext(AuthContext);
   const u = {
     displayName: user.displayName,
     email: user.email,
@@ -27,11 +28,10 @@ const ManageMyItems = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/deleteItem/${id}`, {
+          .delete(`${url}deleteItem/${id}`, u, {
             withCredentials: true,
           })
           .then((res) => {
-            console.log('response', res);
             if (res.data.acknowledged) {
               Swal.fire({
                 title: "Deleted!",
@@ -56,12 +56,12 @@ const ManageMyItems = () => {
     queryKey: ["manageItems"],
     queryFn: async () =>
       await axios
-        .post(`http://localhost:5000/getMyItem/`, u, {
+        .post(`${url}getMyItem/`, u, {
           withCredentials: true,
         })
         .then((res) => res.data)
         .catch((e) => {
-          console.log("error from react query", e);
+          toast.error(e.message);
         }),
   });
 

@@ -4,14 +4,17 @@ import { useParams } from "react-router";
 import Loading from "./Loading";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Details = () => {
+  const { url } = useContext(AuthContext)
   const { id } = useParams();
   const { data, isPending, error } = useQuery({
     queryKey: ["details"],
     queryFn: async () =>
       await axios
-        .get(`http://localhost:5000/getItem/${id}`, { withCredentials: true })
+        .get(`${url}getItem/${id}`, { withCredentials: true })
         .then((res) => res.data),
   });
 
@@ -22,7 +25,7 @@ const Details = () => {
     }
     data.recovered = true;
     axios
-      .put(`http://localhost:5000/statusUpdate/${id}`, {
+      .put(`${url}statusUpdate/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -35,7 +38,7 @@ const Details = () => {
           };
 
           axios
-            .post(`http://localhost:5000/addRecoveredItem`, recoveredItem, {
+            .post(`${url}addRecoveredItem`, recoveredItem, {
               withCredentials: true,
             })
             .then((res) => {

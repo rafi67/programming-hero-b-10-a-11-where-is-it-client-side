@@ -17,7 +17,6 @@ const Register = () => {
 
     const form = new FormData(e.target);
     const name = form.get("name");
-    console.log('name', name);
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
 
     const email = form.get("email");
