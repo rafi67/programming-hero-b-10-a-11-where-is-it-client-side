@@ -10,6 +10,7 @@ import { Link } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import { motion } from "motion/react";
 
 const Home = () => {
   const { url } = useContext(AuthContext);
@@ -18,7 +19,7 @@ const Home = () => {
     queryKey: ["home"],
     queryFn: async () =>
       await axios
-        .get(url+"getItems")
+        .get(url + "getItems")
         .then((res) => res.data)
         .catch((e) => {
           toast.error(e.message);
@@ -55,32 +56,37 @@ const Home = () => {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {data.map((d) => (
-              <div key={d._id} className="card bg-base-100 w-96 shadow-xl">
-                <figure className="px-10 pt-10">
-                  <img
-                    src={d.thumbnail}
-                    alt="Shoes"
-                    className="rounded-xl w-full h-[250px]"
-                  />
-                </figure>
-                <div className="card-body items-start space-y-3">
-                  <h2 className="card-title text-[#09080F] font-semibold text-2xl">
-                    {d.title}
-                  </h2>
-                  <p className="text-[#09080F99] text-xl font-medium text-left">
-                    {d.description}
-                  </p>
-                  <div className="card-actions">
-                    <Link
-                      onClick={resetDetails}
-                      className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full"
-                      to={`/details/${d._id}`}
-                    >
-                      View Details
-                    </Link>
-                  </div>
+            <motion.div
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.8 }}
+              key={d._id}
+              className="card bg-base-100 w-96 shadow-xl"
+            >
+              <figure className="px-10 pt-10">
+                <img
+                  src={d.thumbnail}
+                  alt="Shoes"
+                  className="rounded-xl w-full h-[250px]"
+                />
+              </figure>
+              <div className="card-body items-start space-y-3">
+                <h2 className="card-title text-[#09080F] font-semibold text-2xl">
+                  {d.title}
+                </h2>
+                <p className="text-[#09080F99] text-xl font-medium text-left">
+                  {d.description}
+                </p>
+                <div className="card-actions">
+                  <Link
+                    onClick={resetDetails}
+                    className="btn bg-white border-2 border-[#9538E2] text-[#9538E2] font-semibold rounded-full"
+                    to={`/details/${d._id}`}
+                  >
+                    View Details
+                  </Link>
                 </div>
               </div>
+            </motion.div>
           ))}
         </div>
         <Link
