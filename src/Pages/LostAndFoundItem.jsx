@@ -4,9 +4,10 @@ import Loading from "./Loading";
 import { Link } from "react-router";
 import Lottie from "lottie-react";
 import Search from "../search.json";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import DataNotFound from "./DataNotFound";
 
 const LostAndFoundItem = () => {
   const { url } = useContext(AuthContext);
@@ -15,11 +16,21 @@ const LostAndFoundItem = () => {
     queryKey: ["page"],
     queryFn: async () =>
       await axios
-        .get(url+"getAllItem", { withCredentials: true })
+        .get(url + "getAllItem", { withCredentials: true })
         .then((res) => res.data),
-    refetchInterval: 300000,
     refetchOnWindowFocus: false,
   });
+
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fetchData, setFetchData] = useState();
+  const [numberOfPages, setNumberOfPages] = useState();
+
+  const pages = [...Array(numberOfPages).keys()];
+
+  const handleItemsPerPage = (e) => {
+    setItemsPerPage(parseInt(e.target.value));
+  };
 
   const search = (e) => {
     let input = e.target.value.toLowerCase();
@@ -41,8 +52,22 @@ const LostAndFoundItem = () => {
     query.removeQueries("details");
   };
 
+  useEffect(() => {
+    if (data?.length) {
+      const total = Math.ceil(data.length / itemsPerPage);
+      setNumberOfPages(total);
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      setFetchData(data.slice(startIndex, endIndex));
+    }
+  }, [data, currentPage, itemsPerPage]);
+
   if (isPending) {
     return <Loading></Loading>;
+  }
+
+  if (data.length===0) {
+    return <DataNotFound />;
   }
 
   if (error) {
@@ -80,7 +105,7 @@ const LostAndFoundItem = () => {
       </h1>
       {isFound ? (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {data.map((d) => (
+          {fetchData?.map((d) => (
             <div key={d._id} className="card bg-base-100 shadow-xl">
               <figure className="px-10 pt-10">
                 <img
@@ -123,6 +148,29 @@ const LostAndFoundItem = () => {
           </button>
         </div>
       )}
+      <div className="space-x-1">
+        {pages.map((page) => (
+          <button
+            className="btn"
+            key={page}
+            onClick={() => setCurrentPage(page + 1)}
+          >
+            {page + 1}
+          </button>
+        ))}
+        <select
+          value={itemsPerPage}
+          name=""
+          id=""
+          onChange={handleItemsPerPage}
+        >
+          <option value="6">Item Per Page</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
+      </div>
     </div>
   );
 };
