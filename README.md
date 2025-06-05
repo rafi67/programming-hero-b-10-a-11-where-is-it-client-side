@@ -10,17 +10,17 @@
 - User can manage their items by deleting or updating.
 
 ## Packages
--react toastify
--react sweet alert-2
--react date-picker
--axios
--tanstack query
--prop-types
--motion
--swiper
--lottie react
--react helmet
--react icons
--react router
--react simple typewriter
+-react toastify.
+-react sweet alert-2.
+-react date-picker.
+-axios.
+-tanstack query.
+-prop-types.
+-motion.
+-swiper.
+-lottie react.
+-react helmet.
+-react icons.
+-react router.
+-react simple typewriter.
 
