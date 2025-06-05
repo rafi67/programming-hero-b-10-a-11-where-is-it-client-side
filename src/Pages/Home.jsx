@@ -60,20 +60,20 @@ const Home = () => {
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.8 }}
               key={d._id}
-              className="card bg-base-100 w-96 shadow-xl"
+              className="card bg-base-100 w-full shadow-xl"
             >
               <figure className="px-10 pt-10">
                 <img
                   src={d.thumbnail}
                   alt="Shoes"
-                  className="rounded-xl w-full h-[250px]"
+                  className="rounded-xl w-[80%] lg:w-full h-[250px]"
                 />
               </figure>
               <div className="card-body items-start space-y-3">
-                <h2 className="card-title text-[#09080F] font-semibold text-2xl">
+                <h2 className="card-title text-[#09080F] font-semibold text-sm lg:text-2xl">
                   {d.title}
                 </h2>
-                <p className="text-[#09080F99] text-xl font-medium text-left">
+                <p className="text-[#09080F99] text-sm lg:text-xl font-medium text-left">
                   {d.description}
                 </p>
                 <div className="card-actions">
