@@ -28,7 +28,7 @@ const ManageMyItems = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`${url}deleteItem/${id}`, u, {
+          .delete(`${url}deleteItem/${id}`, {
             withCredentials: true,
           })
           .then((res) => {
@@ -70,7 +70,7 @@ const ManageMyItems = () => {
   }
 
   if (error) {
-    return <p>{error.message}</p>;
+    toast.error(error.message);
   }
 
   if (data?.length === 0) {
