@@ -50,7 +50,7 @@ const Home = () => {
     <div className="space-y-4">
       {/* lost and find items section */}
       <section className="flex flex-col items-center space-y-2 mb-16">
-        <h1 className="text-4xl font-extrabold text-[#0B0B0B]">
+        <h1 className="text-xl lg:text-4xl font-extrabold text-[#0B0B0B]">
           {text}
           <Cursor cursorColor="black" />
         </h1>

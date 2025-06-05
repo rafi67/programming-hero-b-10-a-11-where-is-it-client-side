@@ -33,12 +33,31 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to={'/lostAndFoundItems'}>Lost & Found Items</Link>
+              <Link to={"/lostAndFoundItems"}>Lost & Found Items</Link>
             </li>
+            {user && user?.email && (
+              <li>
+                <Link to="/addLostAndFoundItems">Add Lost & Found Items</Link>
+              </li>
+            )}
+            {user && user?.email && (
+              <li>
+                <Link to={"/allRecoveredItems"}>All Recovered Items</Link>
+              </li>
+            )}
+            {user && user?.email && (
+              <li>
+                <Link to="/manageMyItems">Manage My Items</Link>
+              </li>
+            )}
           </ul>
         </div>
-        <Link className="btn btn-ghost text-xl" to="/">
-        <img src="https://img.icons8.com/?size=100&id=B5GsL9WNW5NE&format=png&color=000000" alt="" className="w-[20%]" />
+        <Link className="btn btn-ghost text-xl hidden lg:flex" to="/">
+          <img
+            src="https://img.icons8.com/?size=100&id=B5GsL9WNW5NE&format=png&color=000000"
+            alt=""
+            className="w-[20%]"
+          />
           WhereIsIt
         </Link>
       </div>
@@ -51,47 +70,47 @@ const Navbar = () => {
           </li>
           {user && user?.email && (
             <li>
-              <Link to="/lostAndFoundItems" className="font-bold">Lost & Found Items</Link>
+              <Link to="/lostAndFoundItems" className="font-bold">
+                Lost & Found Items
+              </Link>
             </li>
           )}
         </ul>
       </div>
       <div className="navbar-end space-x-4">
         {user && user?.email && (
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end hidden lg:inline">
             <div
               tabIndex={0}
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-                <div className="w-10">
-                  <img
-                    className="rounded-full"
-                    alt="Tailwind CSS Navbar component"
-                    src={user.photoURL}
-                  />
-                </div>
+              <div className="w-10">
+                <img
+                  className="rounded-full"
+                  alt="Tailwind CSS Navbar component"
+                  src={user.photoURL}
+                />
+              </div>
             </div>
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to='/addLostAndFoundItems'>Add Lost & Found Items</Link>
+                <Link to="/addLostAndFoundItems">Add Lost & Found Items</Link>
               </li>
               <li>
-                <Link to={'/allRecoveredItems'}>All Recovered Items</Link>
+                <Link to={"/allRecoveredItems"}>All Recovered Items</Link>
               </li>
               <li>
-                <Link to='/manageMyItems'>Manage My Items</Link>
+                <Link to="/manageMyItems">Manage My Items</Link>
               </li>
             </ul>
           </div>
         )}
 
-        {
-          user && user?.email && <p>{user.displayName}</p>
-        }
+        {user && user?.email && <p className="hidden lg:inline">{user.displayName}</p>}
 
         {user && user?.email ? (
           <a className="btn" onClick={logOut}>
