@@ -16,7 +16,7 @@ const LostAndFoundItem = () => {
     queryKey: ["page"],
     queryFn: async () =>
       await axios
-        .get(url + "getAllItem", { withCredentials: true })
+        .get(url + "getAllItem")
         .then((res) => res.data),
     refetchOnWindowFocus: false,
   });

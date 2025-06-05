@@ -68,13 +68,11 @@ const Navbar = () => {
               Home
             </Link>
           </li>
-          {user && user?.email && (
-            <li>
-              <Link to="/lostAndFoundItems" className="font-bold">
-                Lost & Found Items
-              </Link>
-            </li>
-          )}
+          <li>
+            <Link to="/lostAndFoundItems" className="font-bold">
+              Lost & Found Items
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="navbar-end space-x-4">
@@ -110,7 +108,9 @@ const Navbar = () => {
           </div>
         )}
 
-        {user && user?.email && <p className="hidden lg:inline">{user.displayName}</p>}
+        {user && user?.email && (
+          <p className="hidden lg:inline">{user.displayName}</p>
+        )}
 
         {user && user?.email ? (
           <a className="btn" onClick={logOut}>
