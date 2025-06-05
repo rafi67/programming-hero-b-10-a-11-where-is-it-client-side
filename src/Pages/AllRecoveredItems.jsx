@@ -44,7 +44,7 @@ const AllRecoveredItems = () => {
           <img
             src="https://img.icons8.com/?size=100&id=11393&format=png&color=000000"
             alt=""
-            className="w-[30px] h-[30px]"
+            className="w-[15px] h-[15px] lg:w-[30px] lg:h-[30px]"
             onClick={() => setIsCard(true)}
           />
         </button>
@@ -52,7 +52,7 @@ const AllRecoveredItems = () => {
           <img
             src="https://img.icons8.com/?size=100&id=FrYK39f5seKb&format=png&color=000000"
             alt=""
-            className="w-[30px] h-[30px]"
+            className="w-[15px] h-[15px] lg:w-[30px] lg:h-[30px]"
             onClick={() => setIsCard(false)}
           />
         </button>
