@@ -12,7 +12,7 @@ import DataNotFound from "./DataNotFound";
 const LostAndFoundItem = () => {
   const { url } = useContext(AuthContext);
   const [isFound, setIsFound] = useState(true);
-  const { data, isPending, error, refetch } = useQuery({
+  const { data, isPending, error } = useQuery({
     queryKey: ["page"],
     queryFn: async () =>
       await axios
@@ -25,6 +25,7 @@ const LostAndFoundItem = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [fetchData, setFetchData] = useState();
   const [numberOfPages, setNumberOfPages] = useState();
+  const [isSearching, setIsSearching] = useState(false);
 
   const pages = [...Array(numberOfPages).keys()];
 
@@ -33,6 +34,7 @@ const LostAndFoundItem = () => {
   };
 
   const search = (e) => {
+    setIsSearching(true);
     let input = e.target.value.toLowerCase();
     input = input.replace(/^\s+|\s+$/g, "");
 
@@ -42,7 +44,8 @@ const LostAndFoundItem = () => {
     );
     if (result.length !== 0) {
       setIsFound(true);
-      query.setQueryData(["page"], result);
+      setCurrentPage;
+      setFetchData(result);
     } else setIsFound(false);
   };
 
@@ -66,7 +69,7 @@ const LostAndFoundItem = () => {
     return <Loading></Loading>;
   }
 
-  if (data.length===0) {
+  if (data.length === 0) {
     return <DataNotFound />;
   }
 
@@ -141,7 +144,8 @@ const LostAndFoundItem = () => {
             className="btn btn-primary rounded-3xl"
             onClick={() => {
               setIsFound(true);
-              refetch();
+              setIsSearching(false);
+              setFetchData(data);
             }}
           >
             Refresh
@@ -149,7 +153,7 @@ const LostAndFoundItem = () => {
         </div>
       )}
       <div className="space-x-1">
-        {pages.map((page) => (
+        {!isSearching && pages.map((page) => (
           <button
             className="btn"
             key={page}
@@ -158,18 +162,20 @@ const LostAndFoundItem = () => {
             {page + 1}
           </button>
         ))}
-        <select
-          value={itemsPerPage}
-          name=""
-          id=""
-          onChange={handleItemsPerPage}
-        >
-          <option value="6">Item Per Page</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-        </select>
+        {!isSearching && (
+          <select
+            value={itemsPerPage}
+            name=""
+            id=""
+            onChange={handleItemsPerPage}
+          >
+            <option value="6">Item Per Page</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+        )}
       </div>
     </div>
   );
