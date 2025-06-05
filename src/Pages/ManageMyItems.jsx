@@ -116,7 +116,7 @@ const ManageMyItems = () => {
                   <td>{`${d.date}`}</td>
                   <th>
                     <Link className="btn btn-ghost btn-xs" to={`/updateItem/${d._id}`}>
-                      <MdEdit />
+                      <MdEdit className="text-2xl" />
                     </Link>
                   </th>
                   <th>
@@ -124,7 +124,7 @@ const ManageMyItems = () => {
                       className="btn btn-ghost btn-xs"
                       onClick={() => handleDelete(d._id)}
                     >
-                      <MdDelete />
+                      <MdDelete className="text-2xl" />
                     </button>
                   </th>
                 </tr>
