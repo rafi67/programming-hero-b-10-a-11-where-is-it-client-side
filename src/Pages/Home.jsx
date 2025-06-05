@@ -66,7 +66,7 @@ const Home = () => {
                 <img
                   src={d.thumbnail}
                   alt="Shoes"
-                  className="rounded-xl w-[80%] lg:w-full h-[250px]"
+                  className="rounded-xl w-full h-[250px]"
                 />
               </figure>
               <div className="card-body items-start space-y-3">
