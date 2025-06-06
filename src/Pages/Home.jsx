@@ -25,6 +25,7 @@ const Home = () => {
           toast.error(e.message);
         }),
     refetchInterval: 300000,
+    refetchOnWindowFocus: false,
   });
 
   const query = useQueryClient();

@@ -39,8 +39,7 @@ const LostAndFoundItem = () => {
     input = input.replace(/^\s+|\s+$/g, "");
 
     const result = data.filter(
-      (d) =>
-        d.title.toLowerCase() === input || d.location.toLowerCase() === input
+      d => d.title.toLowerCase().includes(input) || d.location.toLowerCase().includes(input)
     );
     if (result.length !== 0) {
       setIsFound(true);

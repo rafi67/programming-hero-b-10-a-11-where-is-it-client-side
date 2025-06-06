@@ -16,7 +16,7 @@ const ManageMyItems = () => {
     email: user.email,
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = id => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -39,8 +39,7 @@ const ManageMyItems = () => {
                 icon: "success",
               });
               refetch();
-            }
-            else {
+            } else {
               Swal.fire({
                 title: "Oops...",
                 text: "Something went wrong!",
@@ -63,6 +62,7 @@ const ManageMyItems = () => {
         .catch((e) => {
           toast.error(e.message);
         }),
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading || isPending) {
@@ -74,7 +74,7 @@ const ManageMyItems = () => {
   }
 
   if (data?.length === 0) {
-    return <DataNotFound/>;
+    return <DataNotFound />;
   }
 
   return (
@@ -98,36 +98,39 @@ const ManageMyItems = () => {
           <tbody>
             {/* row 1 */}
             {data.map((d) => (
-                <tr key={d._id}>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img src={`${d.thumbnail}`} alt="Item" />
-                        </div>
+              <tr key={d._id}>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle h-12 w-12">
+                        <img src={`${d.thumbnail}`} alt="Item" />
                       </div>
                     </div>
-                  </td>
-                  <td>{`${d.postType}`}</td>
-                  <td>{`${d.title}`}</td>
-                  <td>{`${d.description}`}</td>
-                  <td>{`${d.category}`}</td>
-                  <td>{`${d.location}`}</td>
-                  <td>{`${d.date}`}</td>
-                  <th>
-                    <Link className="btn btn-ghost btn-xs" to={`/updateItem/${d._id}`}>
-                      <MdEdit className="text-2xl" />
-                    </Link>
-                  </th>
-                  <th>
-                    <button
-                      className="btn btn-ghost btn-xs"
-                      onClick={() => handleDelete(d._id)}
-                    >
-                      <MdDelete className="text-2xl" />
-                    </button>
-                  </th>
-                </tr>
+                  </div>
+                </td>
+                <td>{`${d.postType}`}</td>
+                <td>{`${d.title}`}</td>
+                <td>{`${d.description}`}</td>
+                <td>{`${d.category}`}</td>
+                <td>{`${d.location}`}</td>
+                <td>{`${d.date}`}</td>
+                <th>
+                  <Link
+                    className="btn btn-ghost btn-xs"
+                    to={`/updateItem/${d._id}`}
+                  >
+                    <MdEdit className="text-2xl" />
+                  </Link>
+                </th>
+                <th>
+                  <button
+                    className="btn btn-ghost btn-xs"
+                    onClick={() => handleDelete(d._id)}
+                  >
+                    <MdDelete className="text-2xl" />
+                  </button>
+                </th>
+              </tr>
             ))}
           </tbody>
           {/* foot */}

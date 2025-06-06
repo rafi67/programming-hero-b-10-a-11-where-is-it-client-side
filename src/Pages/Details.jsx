@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Details = () => {
-  const { url } = useContext(AuthContext)
+  const { url } = useContext(AuthContext);
   const { id } = useParams();
   const { data, isPending, error } = useQuery({
     queryKey: ["details"],
@@ -16,6 +16,7 @@ const Details = () => {
       await axios
         .get(`${url}getItem/${id}`, { withCredentials: true })
         .then((res) => res.data),
+    refetchOnWindowFocus: false,
   });
 
   const handleSubmit = () => {

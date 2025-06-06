@@ -19,6 +19,7 @@ const EditLostAndFoundItem = () => {
       await axios
         .get(`${url}getItem/${id}`, { withCredentials: true })
         .then((res) => res.data),
+    refetchOnWindowFocus: false,
   });
 
   const handleSubmit = (e) => {
@@ -65,7 +66,11 @@ const EditLostAndFoundItem = () => {
       <form id="my-form" className="card-body" onSubmit={handleSubmit}>
         <fieldset className="fieldset">
           <label className="fieldset-label">Post Type</label>
-          <select defaultValue={data.postType} className="select" name="postType">
+          <select
+            defaultValue={data.postType}
+            className="select"
+            name="postType"
+          >
             <option disabled={true} selected={true}>
               Select Post Type
             </option>
