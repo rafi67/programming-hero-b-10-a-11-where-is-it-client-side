@@ -15,9 +15,7 @@ const LostAndFoundItem = () => {
   const { data, isPending, error } = useQuery({
     queryKey: ["page"],
     queryFn: async () =>
-      await axios
-        .get(url + "getAllItem")
-        .then((res) => res.data),
+      await axios.get(url + "getAllItem").then((res) => res.data),
     refetchOnWindowFocus: false,
   });
 
@@ -38,10 +36,12 @@ const LostAndFoundItem = () => {
     let input = e.target.value.toLowerCase();
     input = input.replace(/^\s+|\s+$/g, "");
 
-    if(input.length===0) setIsSearching(false);
+    if (input.length === 0) setIsSearching(false);
 
     const result = data.filter(
-      d => d.title.toLowerCase().includes(input) || d.location.toLowerCase().includes(input)
+      (d) =>
+        d.title.toLowerCase().includes(input) ||
+        d.location.toLowerCase().includes(input)
     );
     if (result.length !== 0) {
       setIsFound(true);
@@ -153,15 +153,16 @@ const LostAndFoundItem = () => {
         </div>
       )}
       <div className="space-x-1">
-        {!isSearching && pages.map((page) => (
-          <button
-            className="btn"
-            key={page}
-            onClick={() => setCurrentPage(page + 1)}
-          >
-            {page + 1}
-          </button>
-        ))}
+        {!isSearching &&
+          pages.map((page) => (
+            <button
+              className="btn"
+              key={page}
+              onClick={() => setCurrentPage(page + 1)}
+            >
+              {page + 1}
+            </button>
+          ))}
         {!isSearching && (
           <select
             value={itemsPerPage}

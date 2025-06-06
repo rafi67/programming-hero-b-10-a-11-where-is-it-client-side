@@ -50,19 +50,20 @@ const Home = () => {
   return (
     <div className="space-y-4">
       {/* lost and find items section */}
-      <section className="flex flex-col items-center space-y-2 mb-16">
+      <motion.section
+        initial={{ x: -100, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="flex flex-col items-center space-y-2 mb-16"
+      >
         <h1 className="text-xl lg:text-4xl font-extrabold text-[#0B0B0B]">
           {text}
           <Cursor cursorColor="black" />
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {data?.map((d) => (
-            <motion.div
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.8 }}
-              key={d._id}
-              className="card bg-base-100 w-full shadow-xl"
-            >
+            <div key={d._id} className="card bg-base-100 w-full shadow-xl">
               <figure className="px-10 pt-10">
                 <img
                   src={d.thumbnail}
@@ -87,7 +88,7 @@ const Home = () => {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
         <Link
@@ -96,10 +97,16 @@ const Home = () => {
         >
           See All
         </Link>
-      </section>
+      </motion.section>
 
       {/* how to proceed section */}
-      <section className="text-center space-y-4">
+      <motion.section
+        initial={{ x: -100, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-center space-y-4"
+      >
         <h1 className="text-4xl font-bold">How to Proceed</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           {/* card 1 */}
@@ -150,10 +157,16 @@ const Home = () => {
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* About Section */}
-      <section className="text-center mt-24 space-y-4">
+      <motion.section
+        initial={{ x: -100, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-center mt-24 space-y-4"
+      >
         <h1 className="text-3xl text-[#09080F] font-bold">Where Is It</h1>
         <p className="text-lg font-medium text-[#09080F99]">
           WhereIsIt is a Lost and Found web application designed to help users
@@ -167,7 +180,7 @@ const Home = () => {
           reducing stress and increasing the chances of retrieving valuable
           possessions.
         </p>
-      </section>
+      </motion.section>
     </div>
   );
 };

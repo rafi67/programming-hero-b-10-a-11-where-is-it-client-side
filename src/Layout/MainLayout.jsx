@@ -16,22 +16,20 @@ const MainLayout = () => {
   path +=
     pathname === "/"
       ? "Home"
-      : pathname.charAt(1).toUpperCase() + pathname.slice(2).split('/')[0];
+      : pathname.charAt(1).toUpperCase() + pathname.slice(2).split("/")[0];
 
   return (
     <div className="container min-h-screen flex flex-col font-display space-y-2 justify-between mx-auto">
       <header>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>
-            {path}
-          </title>
+          <title>{path}</title>
           <link rel="canonical" href="http://mysite.com/example" />
         </Helmet>
         <Header></Header>
       </header>
       <ToastContainer position="top-center" />
-      <main className="mx-auto w-full text-center">
+      <main className="mx-auto w-full text-center overflow-x-hidden">
         {loading ? <Loading></Loading> : <Outlet />}
       </main>
       <footer>
