@@ -56,7 +56,7 @@ const Home = () => {
           <Cursor cursorColor="black" />
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {data.map((d) => (
+          {data?.map((d) => (
             <motion.div
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.8 }}

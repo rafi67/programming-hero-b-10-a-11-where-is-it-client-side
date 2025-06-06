@@ -38,12 +38,13 @@ const LostAndFoundItem = () => {
     let input = e.target.value.toLowerCase();
     input = input.replace(/^\s+|\s+$/g, "");
 
+    if(input.length===0) setIsSearching(false);
+
     const result = data.filter(
       d => d.title.toLowerCase().includes(input) || d.location.toLowerCase().includes(input)
     );
     if (result.length !== 0) {
       setIsFound(true);
-      setCurrentPage;
       setFetchData(result);
     } else setIsFound(false);
   };
