@@ -24,6 +24,7 @@ const LostAndFoundItem = () => {
   const [fetchData, setFetchData] = useState();
   const [numberOfPages, setNumberOfPages] = useState();
   const [isSearching, setIsSearching] = useState(false);
+  const [activeButton, setActiveButton] = useState();
 
   const pages = [...Array(numberOfPages).keys()];
 
@@ -157,9 +158,14 @@ const LostAndFoundItem = () => {
         {!isSearching &&
           pages.map((page) => (
             <button
-              className="btn"
+              className={`btn ${
+                activeButton === page ? "bg-[#E0E0E0]" : ""
+              }`}
               key={page}
-              onClick={() => setCurrentPage(page + 1)}
+              onClick={() => {
+                setCurrentPage(page + 1);
+                setActiveButton(page);
+              }}
             >
               {page + 1}
             </button>
