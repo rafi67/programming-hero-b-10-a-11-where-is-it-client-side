@@ -158,7 +158,7 @@ const LostAndFoundItem = () => {
             <button
               className="btn"
               key={page}
-              onClick={() => setCurrentPage(page + 1)}
+              onClick={() => setCurrentPage(page)}
             >
               {page + 1}
             </button>
