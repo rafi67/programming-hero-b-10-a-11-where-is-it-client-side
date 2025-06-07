@@ -31,6 +31,7 @@ const LostAndFoundItem = () => {
   const handleItemsPerPage = (e) => {
     setItemsPerPage(parseInt(e.target.value));
     setCurrentPage(1);
+    setActiveButton(-1);
   };
 
   const search = (e) => {
@@ -65,7 +66,7 @@ const LostAndFoundItem = () => {
       const endIndex = startIndex + itemsPerPage;
       setFetchData(data.slice(startIndex, endIndex));
     }
-  }, [data, currentPage, itemsPerPage]);
+  }, [data, currentPage, itemsPerPage, activeButton]);
 
   if (isPending) {
     return <Loading></Loading>;
