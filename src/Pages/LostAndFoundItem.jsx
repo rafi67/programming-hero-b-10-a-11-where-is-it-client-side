@@ -29,6 +29,7 @@ const LostAndFoundItem = () => {
 
   const handleItemsPerPage = (e) => {
     setItemsPerPage(parseInt(e.target.value));
+    setCurrentPage(1);
   };
 
   const search = (e) => {
@@ -158,7 +159,7 @@ const LostAndFoundItem = () => {
             <button
               className="btn"
               key={page}
-              onClick={() => setCurrentPage(page)}
+              onClick={() => setCurrentPage(page + 1)}
             >
               {page + 1}
             </button>
